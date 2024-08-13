@@ -1,15 +1,19 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import dotenv from "dotenv";
+import connectDB from "./utils/db.js";
+import userRoute from "./routes/user.route.js"
+dotenv.config({});
 
 const app=express();
 
-app.get("/home",(req,res)=>{
-    return res.status(200).json({
-        message:"I am coming from backend",
-        success:true
-    })
-});
+// app.get("/home",(req,res)=>{
+//     return res.status(200).json({
+//         message:"I am coming from backend",
+//         success:true
+//     })
+// });
 
 //  middlewere
 app.use(express.json());
@@ -21,7 +25,11 @@ const corsOptions={
 }
 app.use(cors(corsOptions));
 
-const port=3000;
+//  api's
+app.use("/api/v1/user",userRoute);
+
+const port= process.env.port || 3000;
 app.listen(port,()=>{
+    connectDB();
     console.log(`Server running at port ${port}`);
 })

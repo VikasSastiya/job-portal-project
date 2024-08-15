@@ -43,5 +43,5 @@ const jobSchema= new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Application',
     }]
-}{timestamps:true});
+},{timestamps:true});
 export const Job=mongoose.model("Job",jobSchema);

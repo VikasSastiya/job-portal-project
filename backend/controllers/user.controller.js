@@ -33,9 +33,10 @@ export const register=async (req,res) => {
         });
 
     }  catch(error){
-        console.log(error);
+     
+ console.log(error);
     }
-}
+    }
 
 export const login = async(req,res)=> {
     try {
@@ -109,8 +110,8 @@ export const logout =async(req,res) => {
 export const updateProfile=async (req,res)=> {
     try {
         const {fullname,email,phoneNumber,bio,skills}=req.body;
-          const file=req.file;
-        if(!fullname||!email||!phoneNumber||password||!role){
+        //   const file=req.file;
+        if(!fullname||!email||!phoneNumber||!password||!role){
             
             return res.status(400).json({
                 message:"Something is missing",
@@ -123,6 +124,7 @@ export const updateProfile=async (req,res)=> {
         const skillArray=skills.split(",");
         const userId=req.id;   //   middlewere authentication
         let user= await User.findById(userId);
+        console.log(userId);
 
         if(!user) {
             return res.status(400).json({
@@ -135,7 +137,7 @@ export const updateProfile=async (req,res)=> {
         user.email=email,
         user.phoneNumber=phoneNumber,
         user.profile.bio=bio,
-        user.profile.skills=skillsArray
+        user.profile.skills=skillArray
 
   // resume comes later here
 
